@@ -40,17 +40,34 @@ const getPreparedCommit = context => {
   return message;
 };
 
+const getJiraProject = project => {
+  if (!project) {
+    return [];
+  }
+  if (Array.isArray(project)) {
+    return project.filter(j => typeof j === 'string' && j && j.trim()).map(j => j.trim());
+  }
+
+  if (typeof project === 'string' && project.trim()) {
+    return [project.trim()];
+  }
+
+  return [];
+};
+
 module.exports = {
+  getPreparedCommit,
   getQuestions(config, cz) {
     // normalize config optional options
     const scopeOverrides = config.scopeOverrides || {};
     const messages = config.messages || {};
     const skipQuestions = config.skipQuestions || [];
-    const jiraPrefix = config.jiraPrefix || 'NULL';
+    const jiraPrefix = getJiraProject(config.jiraPrefix);
 
+    messages.jiraPrefix = messages.jiraPrefix || `Select a project number to submit\n`;
     messages.jirasBody =
       messages.jirasBody ||
-      `Enter jira ID(s) (e.g. "0000", message will become "${jiraPrefix}-0000 #comment".): (press enter to skip)\n`;
+      `Enter jira ID(s) (e.g. "0000", message will become "ProjectNumber-0000 #comment".): (press enter to skip)\n`;
     messages.type = messages.type || "Select the type of change that you're committing:";
     messages.scope = messages.scope || '\nDenote the SCOPE of this change (optional):';
     messages.customScope = messages.customScope || 'Denote the SCOPE of this change:';
@@ -71,6 +88,13 @@ module.exports = {
     messages.confirmCommit = messages.confirmCommit || 'Are you sure you want to proceed with the commit above?';
 
     let questions = [
+      {
+        type: 'list',
+        name: 'jiraPrefix',
+        message: messages.jirasBody,
+        when: config.jiraMode || false,
+        choices: jiraPrefix,
+      },
       {
         type: 'input',
         name: 'jirasBody',

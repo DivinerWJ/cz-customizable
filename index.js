@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
 // Inspired by: https://github.com/commitizen/cz-conventional-changelog and https://github.com/commitizen/cz-cli

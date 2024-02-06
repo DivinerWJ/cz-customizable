@@ -1,3 +1,4 @@
+/* eslint-disable nada/path-case */
 const rewire = require('rewire');
 
 describe('cz-customizable', () => {

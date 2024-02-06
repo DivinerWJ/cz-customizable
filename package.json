@@ -1,6 +1,6 @@
 {
-  "version": "0.0.0-development",
-  "name": "cz-customizable",
+  "version": "1.0.0",
+  "name": "@undefined0_0/cz-customizable",
   "description": "Commitizen customizable adapter following the conventional-changelog format.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -19,15 +19,12 @@
     "commit": "./standalone.js",
     "travis-deploy-once": "travis-deploy-once"
   },
-  "homepage": "https://github.com/leoforfree/cz-customizable",
+  "homepage": "https://github.com/DivinerWJ/cz-customizable",
   "repository": {
     "type": "git",
-    "url": "https://github.com/leoforfree/cz-customizable.git"
+    "url": "https://github.com/DivinerWJ/cz-customizable.git"
   },
-  "author": "Leonardo Correa <leonardoanalista@gmail.com>",
-  "contributors": [
-    "Aleksey Guryanov <gurianov@gmail.com>"
-  ],
+  "author": "DivinerWJ <2574114945@qq.com>",
   "license": "MIT",
   "dependencies": {
     "editor": "1.0.0",
@@ -64,5 +61,13 @@
     "ghooks": {
       "pre-commit": "npm run lint && npm run test"
     }
-  }
+  },
+  "files": [
+    "index.js",
+    "logger.js",
+    "buildCommit.js",
+    "questions.js",
+    "standalone.js",
+    "index.d.ts"
+  ]
 }
